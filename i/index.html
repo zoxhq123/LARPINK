@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>@Iraq</title>
+    <style>
+
+        body::before {
+            content: "";
+            background: url('https://cdn.discordapp.com/attachments/1207481884175761498/1223807358161911929/nang.jpg?ex=661b326b&is=6608bd6b&hm=126665fcd9e020670e4ccd180ca5d9dc8f385f826b36416e08ec2256e560cf55&') center/cover no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.2;
+        }
+
+        #who span {
+            display: inline-block;
+            background: url('gif/sparkle_white.gif') no-repeat;
+            background-size: cover;
+            padding: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <main>
+        <img src="https://cdn.discordapp.com/attachments/1207481884175761498/1223807286930309220/IMG_6378.jpg?ex=661b325a&is=6608bd5a&hm=0100321f0a0e00040a0eabc0e5e513b46e9cb4eddeaf79e4fe04bcf96ff76c45&" alt="Profile Picture">
+        <span id="who"></span>
+        <span id="pointer">&#9758;</span>
+        <span id="footer"></span>
+        <div class="flexbox">
+            <a href="https://discord.gg/ivi"><button><i class="icon fa-brands discord"></i>/Ivi</button></a>
+            <a href="https://discord.gg/cybersec"><button><i class="icon fa-brands discord"></i>/CyberSec</button></a>
+            <a href="https://t.me/xrtbase"><button><i class="icon fa-brands telegram"></i>Tele</button></a>
+        </div>
+    </main>
+
+    <audio id="backgroundMusic">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const text = "@iraq";
+        const whoElement = document.getElementById("who");
+        const footerText = "broke? never.";
+        const footerElement = document.getElementById("footer");
+        const pointerElement = document.getElementById("pointer");
+        let index = 0;
+        let typing = true;
+        let musicPlayed = false;
+
+        function createSpans(text, parentElement) {
+            for (let char of text) {
+                const span = document.createElement("span");
+                span.textContent = char;
+                parentElement.appendChild(span);
+            }
+        }
+
+        createSpans(text, whoElement);
+        typeWriter();
+
+        function typeWriter() {
+            if (index < footerText.length && typing) {
+                footerElement.innerHTML += footerText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            } else if (typing) {
+                typing = false;
+                pointerElement.style.display = "inline-block";
+            }
+        }
+
+        function playAudio() {
+            if (!musicPlayed) {
+                const audio = document.getElementById("backgroundMusic");
+                audio.play();
+                musicPlayed = true;
+            }
+        }
+        
+        document.addEventListener("click", playAudio);
+    </script>
+</body>
+</html>

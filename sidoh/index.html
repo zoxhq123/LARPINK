@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>@sidoh <3</title>
+    <style>
+
+        body::before {
+            content: "";
+            background: url('https://media.discordapp.net/attachments/1213349425787961415/1224041452729012384/78868623-D47D-4AE3-90E9-014C9864EB20.gif?ex=661c0c6f&is=6609976f&hm=e99ec953c07236e8788edd4e1cbc7a3696c461d09e0f69bcf9c01581e65071d0&=') center/cover no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.2;
+        }
+
+        #who span {
+            display: inline-block;
+            background: url('gif/sparkle_red.gif') no-repeat;
+            background-size: cover;
+            padding: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <main>
+        <img src="https://media.discordapp.net/attachments/1213349425787961415/1224041452347064380/22F05A17-3503-41F2-B8AC-EA3FAF9A5250.jpg?ex=661c0c6f&is=6609976f&hm=e6f74aa5b08ab86210cf31f2745cbf3e10b2adb139a886271a95eec2002cac60&=&format=webp" alt="Profile Picture">
+        <span id="who"></span>
+        <span id="pointer">&#9758;</span>
+        <span id="footer"></span>
+        <div class="flexbox">
+            <a href="https://discord.gg/abusive"><button><i class="icon fa-brands discord"></i>/Abusive</button></a>
+            <a href="https://discord.gg/dJkn3aK9Xa"><button><i class="icon fa-brands discord"></i>/Graveyard</button></a>
+            <a href="https://t.me/foreignslut"><button><i class="icon fa-brands telegram"></i>Tele</button></a>
+        </div>
+    </main>
+
+    <audio id="backgroundMusic">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const text = "@Sidoh";
+        const whoElement = document.getElementById("who");
+        const footerText = "Discord / mr.sidoh";
+        const footerElement = document.getElementById("footer");
+        const pointerElement = document.getElementById("pointer");
+        let index = 0;
+        let typing = true;
+        let musicPlayed = false;
+
+        function createSpans(text, parentElement) {
+            for (let char of text) {
+                const span = document.createElement("span");
+                span.textContent = char;
+                parentElement.appendChild(span);
+            }
+        }
+
+        createSpans(text, whoElement);
+        typeWriter();
+
+        function typeWriter() {
+            if (index < footerText.length && typing) {
+                footerElement.innerHTML += footerText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            } else if (typing) {
+                typing = false;
+                pointerElement.style.display = "inline-block";
+            }
+        }
+
+        function playAudio() {
+            if (!musicPlayed) {
+                const audio = document.getElementById("backgroundMusic");
+                audio.play();
+                musicPlayed = true;
+            }
+        }
+        
+        document.addEventListener("click", playAudio);
+    </script>
+</body>
+</html>
