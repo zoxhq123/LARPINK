@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>@vozy</title>
+    <style>
+
+        body::before {
+            content: "";
+            background: url('https://cdn.discordapp.com/attachments/1208555307215757343/1223780236013998190/itachi-icegif-40.gif?ex=661b1929&is=6608a429&hm=f52b1449be513a76b4e91263ab9af24f656a04892114f0895d881cf258ec6c85&') center/cover no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.2;
+        }
+
+        #who span {
+            display: inline-block;
+            background: url('gif/sparkle_white.gif') no-repeat;
+            background-size: cover;
+            padding: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <main>
+        <img src="https://cdn.discordapp.com/attachments/1208555307215757343/1223750762375413881/denyi0z-3ebb1b26-567e-4ed2-b220-8fe2bb55700f.jpg?ex=661afdb5&is=660888b5&hm=e29e3be2eddfc0c47da17295226f574722a31bfeff913e2e261d009657dc8759&" alt="Profile Picture">
+        <span id="who"></span>
+        <span id="pointer">&#9758;</span>
+        <span id="footer"></span>
+        <div class="flexbox">
+            <a href="https://discord.gg/abusive"><button><i class="icon fa-brands discord"></i>/Abusive</button></a>
+            <a href="https://discord.gg/cybersec"><button><i class="icon fa-brands discord"></i>/CyberSec</button></a>
+            <a href="https://t.me/vozyq"><button><i class="icon fa-brands telegram"></i>Tele</button></a>
+        </div>
+    </main>
+
+    <audio id="backgroundMusic">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const text = "@vozy";
+        const whoElement = document.getElementById("who");
+        const footerText = "Discord / Vozyq";
+        const footerElement = document.getElementById("footer");
+        const pointerElement = document.getElementById("pointer");
+        let index = 0;
+        let typing = true;
+        let musicPlayed = false;
+
+        function createSpans(text, parentElement) {
+            for (let char of text) {
+                const span = document.createElement("span");
+                span.textContent = char;
+                parentElement.appendChild(span);
+            }
+        }
+
+        createSpans(text, whoElement);
+        typeWriter();
+
+        function typeWriter() {
+            if (index < footerText.length && typing) {
+                footerElement.innerHTML += footerText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            } else if (typing) {
+                typing = false;
+                pointerElement.style.display = "inline-block";
+            }
+        }
+
+        function playAudio() {
+            if (!musicPlayed) {
+                const audio = document.getElementById("backgroundMusic");
+                audio.play();
+                musicPlayed = true;
+            }
+        }
+        
+        document.addEventListener("click", playAudio);
+    </script>
+</body>
+</html>
