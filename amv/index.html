@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>@swat</title>
+    <style>
+
+        body::before {
+            content: "";
+            background: url('https://media.discordapp.net/attachments/972488991804899369/1221196660168986674/madebykubik34.gif?ex=66242804&is=6611b304&hm=f429ea3529de81bf08234634baf352304fddddae1d3fa0c7b79e8ae4c1291dd9&') center/cover no-repeat;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0.2;
+        }
+
+        #who span {
+            display: inline-block;
+            background: url('gif/sparkle_white.gif') no-repeat;
+            background-size: cover;
+            padding: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <main>
+        <img src="https://media.discordapp.net/attachments/1172454751795949568/1221410127995732049/IMG_6628.webp?ex=6624eed3&is=661279d3&hm=8b2757ada209a3929466217f265147c3c67f83de0625bd546a1f812f056970fa&=&format=webp" alt="Profile Picture">
+        <span id="who"></span>
+        <span id="pointer">&#9758;</span>
+        <span id="footer"></span>
+        <div class="flexbox">
+		<a href="https://discord.gg/term"><button><i class="icon fa-brands telegram"></i>/Term</button></a>
+        </div>
+    </main>
+
+    <audio id="backgroundMusic">
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const text = "@AMV";
+        const whoElement = document.getElementById("who");
+        const footerText = "Big Spender - Zox <3";
+        const footerElement = document.getElementById("footer");
+        const pointerElement = document.getElementById("pointer");
+        let index = 0;
+        let typing = true;
+        let musicPlayed = false;
+
+        function createSpans(text, parentElement) {
+            for (let char of text) {
+                const span = document.createElement("span");
+                span.textContent = char;
+                parentElement.appendChild(span);
+            }
+        }
+
+        createSpans(text, whoElement);
+        typeWriter();
+
+        function typeWriter() {
+            if (index < footerText.length && typing) {
+                footerElement.innerHTML += footerText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100);
+            } else if (typing) {
+                typing = false;
+                pointerElement.style.display = "inline-block";
+            }
+        }
+
+        function playAudio() {
+            if (!musicPlayed) {
+                const audio = document.getElementById("backgroundMusic");
+                audio.play();
+                musicPlayed = true;
+            }
+        }
+        
+        document.addEventListener("click", playAudio);
+    </script>
+</body>
+</html>
